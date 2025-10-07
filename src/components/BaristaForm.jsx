@@ -26,6 +26,10 @@ const BaristaForm = () => {
         'blended': ['yes', 'turbo', 'no']
     }
 
+    useEffect(() => {
+        getNextDrink();
+    }, []);
+
     const onNewDrink = () => {
         setInputs({ temperature: '', milk: '', syrup: '', blended: '' });
         setCorrectTemp("");
@@ -62,21 +66,21 @@ const BaristaForm = () => {
         setTrueRecipe(drinkJson.drinks[randomDrinkIndex].ingredients);
     };
 
+
+    // Handle user input changes
     const handleChange = (e) => {
         setInputs((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,
         }));
-
-        useEffect(() => {
-            getNextDrink();
-        }, []);
     };
+
 
 
     return (
         <div className="mini-container">
             <h2>Hi, I'd like to order a:</h2>
+            <h3>{currentDrink}</h3>
             <form>
                 <h3>Temperature</h3>
                 <div className="answer-space" id={correct_temp} >
